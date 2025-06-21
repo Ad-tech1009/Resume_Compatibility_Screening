@@ -1,6 +1,6 @@
 import streamlit as st
 from pypdf import PdfReader
-from utils.getScore(API) import get_score
+from utils.getScore import get_score
 from utils.printScore import display_score_gauge, display_strength_weakness, display_suggestions
 
 st.set_page_config(page_title="Resume Score Calculator", layout="wide")
