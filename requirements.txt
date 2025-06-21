@@ -1,2 +1,5 @@
 streamlit
 pypdf
+google-generativeai
+re
+time
