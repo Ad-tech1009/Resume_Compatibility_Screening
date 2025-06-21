@@ -1,5 +1,7 @@
 import streamlit as st
 from pypdf import PdfReader
+from utils.getScore(API) import get_score
+from utils.printScore import display_score_gauge, display_strength_weakness, display_suggestions
 
 st.set_page_config(page_title="Resume Score Calculator", layout="wide")
 st.markdown(
@@ -18,6 +20,11 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+if "desc" not in st.session_state:
+    st.session_state['desc'] = None
+if "reader" not in st.session_state:
+    st.session_state['reader'] = None
 
 def read_pdf(file):
     pdf_reader = PdfReader(file)
@@ -48,3 +55,15 @@ if submit_button2:
     st.success("Resume Submitted Succesfully.")
   else:
     st.error("Please Upload Resume.")
+
+if st.session_state['reader'] and st.session_state['desc']:
+  col1, col2, col3 = st.columns([6, 1, 1])
+  with col3:
+    get_score_button = st.button("Get Score")
+  st.markdown("---")
+
+  if get_score_button:
+    score, strength, weakness, suggestions = get_score(st.session_state['desc'],st.session_state['reader'])
+    display_score_gauge(score)
+    display_strength_weakness(strength,weakness)
+    display_suggestions(suggestions)
