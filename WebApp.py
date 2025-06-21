@@ -39,6 +39,7 @@ with st.form('job_desc'):
 
 if submit_button1:
   if desc:
+    st.session_state['desc'] = desc
     st.success("Job Description Submitted Successfully.")
   else:
     st.error("Please Enter Job Description.")
@@ -52,6 +53,7 @@ with st.form('resume'):
 if submit_button2:
   if resume_file:
     reader = read_pdf(resume_file)
+    st.session_state['reader'] = reader
     st.success("Resume Submitted Succesfully.")
   else:
     st.error("Please Upload Resume.")
